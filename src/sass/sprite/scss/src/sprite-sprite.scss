@@ -1,0 +1,35 @@
+$1.png: 0px 1px 10px 10px;
+
+$2.png: 11px 1px 10px 10px;
+
+$3.png: 22px 1px 10px 10px;
+
+$4.png: 33px 1px 10px 10px;
+
+$5.png: 44px 1px 10px 10px;
+
+$spriteImage: url(../../img/src\sprite-sprite.png);
+
+@mixin sprite-position-x($sprite, $positionX: 0) {
+  $sprite-offset-x: nth($sprite, 1);
+  background-position-x: $sprite-offset-x + $positionX;
+}
+
+@mixin sprite-position-y($sprite, $positionY: 0) {
+  $sprite-offset-y: nth($sprite, 2);
+  background-position-y: $sprite-offset-y + $positionY;
+}
+
+@mixin sprite-position($sprite, $positionX: 0, $positionY: 0) {
+  @include sprite-position-x($sprite, $positionX);  
+  @include sprite-position-y($sprite, $positionY)
+}
+
+@mixin sprite($sprite, $positionX: 0, $positionY: 0) {
+  background-image: $spriteImage;
+  @include sprite-position($sprite, $positionX, $positionY);  
+  background-repeat: no-repeat;
+
+  background-size: 55px 10px;
+
+}

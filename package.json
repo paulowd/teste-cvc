@@ -8,9 +8,11 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
+    "gulp-if": "^2.0.2",
     "gulp-minify": "^2.1.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.3",
+    "gulp.spritesmith": "^6.9.0",
     "run-sequence": "^2.2.1"
   },
   "dependencies": {
