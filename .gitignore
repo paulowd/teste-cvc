@@ -1,0 +1,32 @@
+
+.DS_Store
+public/*
+
+#IDE
+\.vscode/
+\.idea/
+
+##### NODE
+
+# Logs
+logs
+**/*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# node-waf configuration
+.lock-wscript
+
+# Dependency directories
+node_modules/
+
+# Optional npm cache directory
+.npm
+
+##### Sass
+**/*.sass-cache
+**/*.css.map
