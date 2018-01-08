@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "name": "testecvc",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
