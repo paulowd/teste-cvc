@@ -11,29 +11,53 @@
   <main>
     <div class="container">
       <div class="row">
-        <aside class="col-xs-12 col-md-3">
+        <aside class="grid-xs-12 grid-md-3">
           <div class="aside-box yellow">
-            <form action="">
-              <div class="field-group field-block">
-                <label for="">Local de retirada</label>
-                <input type="text" placeholder="Escolha um local para retirar o veículo">
+            <form id="form-busca-carros">
+              <div class="field-group field-block label-upper">
+                <label for="txt-local-retirada">Local de retirada</label>
+                <input id="txt-local-retirada" type="text" placeholder="Escolha um local para retirar o veículo">
               </div>
               <div class="field-group">
-                <input type="checkbox">
-                <label for="">Devolver o carro em outro local</label>
+                <div class="checkbox-group">
+                  <input type="checkbox" id="opt-devolver">
+                  <label for="opt-devolver">Devolver o carro em outro local</label>
+                </div>
               </div>
-              <div class="field-group field-block">
-                <label for="">Local de devolução</label>
-                <input type="text" placeholder="Escolha um local para devolver o veículo">
+              <div class="field-group field-block label-upper">
+                <label for="txt-local-devolucao">Local de devolução</label>
+                <input id="txt-local-devolucao" type="text" placeholder="Escolha um local para devolver o veículo">
               </div>
-              <div class="field-group field-block">
+              <div class="field-group field-block label-upper">
                 <label for="">Local de retirada</label>
-                <input type="text" placeholder="Escolha um local para retirar o veículo">
+                <input id="" type="text" placeholder="Escolha um local para retirar o veículo">
               </div>
+
+              <div class="panel panel-green">
+                <div class="panel-header text-upper">
+                  Economize até 35%
+                </div>
+                <div class="panel-body">
+                  <div class="field-group">
+                    <div class="checkbox-group">
+                      <input type="checkbox" id="opt-voo">
+                      <label for="opt-voo">Incluir vôo</label>
+                    </div>
+                    <div class="checkbox-group">
+                      <input type="checkbox" id="opt-hotel">
+                      <label for="opt-hotel">Incluir hotel</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button class="btn btn-block btn-blue btn-lg text-upper">
+                Buscar
+              </button>
             </form>
           </div>
         </aside>
-        <div class="col-xs-12 col-md-9">
+        <div class="grid-xs-12 grid-md-9">
 
         </div>
       </div>
