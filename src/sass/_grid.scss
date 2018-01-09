@@ -1,0 +1,70 @@
+$grid-gutter: 15px; // espaçamento entre as colunas
+$grid-columns: 12; // Quantidade de colunas
+
+$min-sm: 320px; // Tamanho do container
+$min-md: 768px; // Tamanho do container
+$min-lg: 1280px; // Tamanho do container
+
+$container-xs: 90%; // Tamanho do container
+$container-sm: 90%; // Tamanho do container
+$container-md: 750px; // Tamanho do container
+$container-lg: 1100px; // Tamanho do container
+
+
+.container {
+  width: $container-xs;
+  margin: 0 auto;
+}
+
+.row {
+  margin: 0 ( 0 - $grid-gutter );
+}
+
+// Código básico das colunas do grid
+[class*="grid-"]{
+  float: left;
+  padding: 0 $grid-gutter;
+  margin-bottom: 20px;
+}
+
+@for $i from 1 through $grid-columns{
+  .grid-xs-#{$i} {
+    width: 100% / $grid-columns * $i
+  }
+}
+
+@media screen and (min-width: $min-sm){
+  .container {
+    width: $container-sm;
+  }
+
+  @for $i from 1 through $grid-columns{
+    .grid-sm-#{$i} {
+      width: 100% / $grid-columns * $i
+    }
+  }
+}
+
+@media screen and (min-width: $min-md){
+  .container {
+    width: $container-md;
+  }
+
+  @for $i from 1 through $grid-columns{
+    .grid-md-#{$i} {
+      width: 100% / $grid-columns * $i
+    }
+  }
+}
+
+@media screen and (min-width: $min-lg){
+  .container {
+    width: $container-lg;
+  }
+
+  @for $i from 1 through $grid-columns{
+    .grid-lg-#{$i} {
+      width: 100% / $grid-columns * $i
+    }
+  }
+}
