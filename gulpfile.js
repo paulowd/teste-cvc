@@ -17,7 +17,7 @@ var path = {
   img_src: 'src/img/',
   img_dist: 'public/assets/img/',
   html_src: 'src/html/',
-  html_dist: 'public/',
+  html_dist: './public/',
   fonts_src: 'src/fonts/',
   fonts_dist: 'public/assets/fonts/',
   node: 'node_modules'
@@ -53,7 +53,7 @@ gulp.task('styles', function() {
 });
 
 gulp.task('html', function() {
-  gulp.src([path.html + '**/*.html'])
+  gulp.src([path.html_src + '**/*.html'])
     .pipe(gulp.dest(path.html_dist));
 });
 
