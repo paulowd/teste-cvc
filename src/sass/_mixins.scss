@@ -1,0 +1,143 @@
+@mixin clear($altura){
+	clear: both;
+	content: " ";
+	height: $altura;
+	visibility: hidden;
+	display: block;
+}
+
+@mixin transition($tempo){
+	transition: all $tempo ease-in-out;
+    -moz-transition: all $tempo ease-in-out;
+    -webkit-transition: all $tempo ease-in-out;
+    -o-transition: all $tempo ease-in-out;
+}
+
+@mixin gradiente($cor1, $cor2) {
+	background: $cor1; /* Old browsers */
+	background: -moz-linear-gradient(top,  $cor1 0%, $cor2 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$cor1), color-stop(100%,$cor2)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  $cor1 0%,$cor2 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  $cor1 0%,$cor2 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  $cor1 0%,$cor2 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  $cor1 0%,$cor2 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$cor1', endColorstr='$cor2',GradientType=0 ); /* IE6-9 */
+}
+
+@mixin arco($cor, $tamanho: 32px, $larguraBorda: 18px, $top: -5px, $left: 0px) {	
+    content: " ";
+    display: block;
+    height:$tamanho;
+    width: $tamanho;
+    border-radius: $tamanho 0 0 0;
+    border-left: $larguraBorda solid $cor;
+    border-top: $larguraBorda solid $cor;
+    position: absolute;
+    left: $left;
+    top: $top;
+}
+
+@mixin after($altura){
+	clear: both;
+	content: " ";
+	height: $altura;
+	display: block;
+}
+
+@mixin radius($borda){
+	border-radius: $borda;
+    -moz-border-radius: $borda;
+    -webkit-border-radius: $borda;
+    -o-border-radius: $borda;
+}
+
+@mixin top-left-radius($borda) {
+    border-top-left-radius: $borda;
+    -moz-border-top-left-radius: $borda;
+    -webkit-border-top-left-radius: $borda;
+    -o-border-top-left-radius: $borda;
+}
+
+@mixin top-right-radius($borda) {
+    border-top-right-radius: $borda;
+    -moz-border-top-right-radius: $borda;
+    -webkit-border-top-right-radius: $borda;
+    -o-border-top-right-radius: $borda;
+}
+
+@mixin bottom-left-radius($borda) {
+    border-bottom-left-radius: $borda;
+    -moz-border-bottom-left-radius: $borda;
+    -webkit-border-bottom-left-radius: $borda;
+    -o-border-bottom-left-radius: $borda;
+}
+
+@mixin bottom-right-radius($borda) {
+    border-bottom-right-radius: $borda;
+    -moz-border-bottom-right-radius: $borda;
+    -webkit-border-bottom-right-radius: $borda;
+    -o-border-bottom-right-radius: $borda;
+}
+
+@mixin box-sizing($box){
+    box-sizing: $box;
+    -moz-box-sizing: $box;
+    -webkit-box-sizing: $box;
+    -o-box-sizing: $box;
+}
+
+@mixin transform($transform){
+    -moz-transform: $transform;
+    -ms-transform: $transform;
+    -o-transform: $transform;
+    -webkit-transform: $transform;
+    transform: $transform;
+}
+
+@mixin text-shadow($hshadow, $vshadow, $blur, $color){
+    -webkit-text-shadow: $hshadow $vshadow $blur $color;
+    -moz-text-shadow: $hshadow $vshadow $blur $color;
+    -o-text-shadow: $hshadow $vshadow $blur $color;
+    text-shadow: $hshadow $vshadow $blur $color;
+}
+
+@mixin alinharVertical() {
+    position: absolute;
+    top: 50%;
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+@mixin alinharHorizontal() {
+    left: 50%;
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+@mixin placeholder($cor){
+    &::-webkit-input-placeholder {
+       color: $cor;
+       /* font: 12px verdana, arial, sans-serif; */
+    }
+
+    &:-moz-placeholder {
+       color: $cor;
+       /* font: 12px verdana, arial, sans-serif; */
+    }
+
+    &::-moz-placeholder {
+       color: $cor;  
+       /* font: 12px verdana, arial, sans-serif; */
+    }
+
+    &:-ms-input-placeholder {  
+       color: $cor;  
+       /* font: 12px verdana, arial, sans-serif; */
+    }
+}
