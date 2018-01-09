@@ -1,9 +1,11 @@
 @mixin clear($altura){
-	clear: both;
-	content: " ";
-	height: $altura;
-	visibility: hidden;
-	display: block;
+    &:after {
+        clear: both;
+        content: " ";
+        height: $altura;
+        visibility: hidden;
+        display: block;
+    }
 }
 
 @mixin transition($tempo){
