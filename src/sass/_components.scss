@@ -71,23 +71,24 @@
   border: 0;
   border-radius: 5px;
   cursor: pointer;
+  text-decoration: none;
   @include transition(.2s);
 
   &.btn-xs {
     height: 20px;
-    line-break: 20px;
+    line-height: 20px;
     font-size: 10px;
   }
 
   &.btn-sm {
     height: 30px;
-    line-break: 30px;
+    line-height: 30px;
     font-size: 11px;
   }
 
   &.btn-lg {
     height: 50px;
-    line-break: 50px;
+    line-height: 50px;
     font-size: 14px;
     font-weight: bold;
   }
@@ -210,3 +211,38 @@
 }
 
 
+ul.pagination {
+  text-align: center;
+  li {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+
+    a {
+      display: block;
+      padding: 0;
+      margin: 0;
+      text-decoration: none;
+      color: $blue-highlight;
+      font-size: 14px;
+      @include transition(.2s);
+
+      &:hover, &.active {
+        background: #eee;
+        color: #000;
+      }
+
+      &.active {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+
+
+
+.icon {
+  display: inline-block;
+}

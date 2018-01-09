@@ -6,6 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Teste CVC - Aluguel de Veículos</title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/sprite/sprite.css">
+
+  <script src="https://use.fontawesome.com/6ff298b380.js"></script>
 </head>
 <body>
   <main>
@@ -98,21 +101,68 @@
           </div>
 
           <div class="resultados-busca">
-            <article class="row">
+            <article class="row item-resultado-busca">
               <div class="grid-xs-12 grid-md-9">
                 <div class="row">
-                  <div class="grid-xs-12 grid-md-5">
-                    Foto
+                  <div class="grid-xs-12 grid-md-5 foto-carro">
+                    <img src="assets/img/carros/carro-1.jpg" alt="">
+                    <div class="locadora">
+                      <img src="assets/img/locadoras/hertz.jpg" alt="Hertz">
+                    </div>
                   </div>
-                  <div class="grid-xs-12 grid-md-5">
-                    Detalhes
+                  <div class="grid-xs-12 grid-md-7 info-locacao">
+                    <h1>Carro economico</h1>
+                    <p class="descricao text-upper">
+                      Código da taxa: dsa<br>
+                      fsdfsd
+                    </p>
+                    <ul class="lista-destaques">
+                      <li>eqw</li>
+                      <li>eqw</li>
+                      <li>eqw</li>
+                      <li>eqw</li>
+                    </ul>
+
+                    <a href="#" class="btn-detalhe">Ver detalhes <i class="fa fa-plus"></i></a>
+
+                    <a href="#" class="btn-favorito"><i class="fa fa-heart"></i></a>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="grid-xs-12 detalhe-locacao">
+                      Super inclusive promocional - Km livre, seguro total do veículo (LDW), seguro a terceiros (SLI), taxas de serviços inclusas e 1 motorista adicional.
+                  </div>
+                  <div class="grid-xs-12">
+                    <ul class="lista-opcionais">
+                      <li><i class="icon icon-portas"></i> 4 portas</li>
+                      <li><i class="icon icon-ar"></i> Ar</li>
+                      <li>A</li>
+                      <li>das</li>
+                      <li>sad</li>
+                    </ul>
                   </div>
                 </div>
               </div>
               <div class="grid-xs-12 grid-md-3">
-                Info aluguel
+                <div class="info-valor-locacao aside-box yellow text-center">
+                  <h3>Total da Locação</h3>
+                  <span class="valor-original">de R$ 938</span><br>
+                  por <span class="valor"><small>R$</small> 838</span><br>
+                  <strong><span class="parcelamento">em até 10x</span></strong>
+
+                  <a href="#" class="btn btn-lg btn-blue btn-block text-upper">Alugar</a>
+                  <small>Taxas inclusas</small>
+                </div>
               </div>
             </article>
+
+            <ul class="pagination">
+              <li><a href="#">&laquo;</a></li>
+              <li><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">&raquo;</a></li>
+            </ul>
           </div>
 
         </div>
