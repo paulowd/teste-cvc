@@ -4,6 +4,25 @@ angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScr
 	$scope.filtro = '';
 	$scope.mensagem = '';
 	$scope.ordem_param = 'none';
+	$scope.moeda = 'real';
+
+	$scope.moedas = {
+		real: {
+			nome: 'Real',
+			simbolo: 'R$',
+			cotacao: 1
+		},
+		dolar: {
+			nome: 'Dolar',
+			simbolo: 'U$',
+			cotacao: 2
+		},
+		euro: {
+			nome: 'Euro',
+			simbolo: '€',
+			cotacao: 3
+		},
+	}
 
 	$scope.pagination = {
 		itemsPerPage: '2',
@@ -66,5 +85,16 @@ angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScr
 			$scope.mensagem = 'Não foi possível apagar a foto ' + foto.titulo;
 		});
 	};
+
+
+	var numberToMoney = function(numero) {
+    var numero = numero.toFixed(2).split('.');
+    numero[0] = numero[0].split(/(?=(?:...)*$)/).join('.');
+    return numero.join(',');
+	}
+
+	$scope.formatarValor = function(valor) {
+		return numberToMoney( valor * $scope.moedas[$scope.moeda].cotacao );
+	}
 
 }]);

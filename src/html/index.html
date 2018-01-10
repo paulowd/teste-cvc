@@ -95,7 +95,7 @@
               <div class="field-group filter-field">
                 <label for="cmb-ipp">Moeda</label>
                 <div class="wrap-select">
-                  <select id="cmb-ipp">
+                  <select id="cmb-ipp" ng-model="moeda">
                     <option value="real">Real</option>
                     <option value="dolar">Dólar</option>
                     <option value="euro">Euro</option>
@@ -132,7 +132,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="grid-xs-12 detalhe-locacao" ng-show="carro.showDetalhe">
+                  <div class="grid-xs-12 detalhe-locacao sample-show-hide" ng-show="carro.showDetalhe">
                       {{carro.detalhes}}
                   </div>
                   <div class="grid-xs-12">
@@ -146,11 +146,11 @@
                 <div class="info-valor-locacao aside-box yellow text-center">
                   <h3>Total da Locação</h3>
                   <div ng-if="carro.desconto > 0">
-                    <span class="valor-original">de R$ {{carro.valor}}</span><br>
-                    por <span class="valor"><small>R$</small> {{(carro.valor * (1 - (carro.desconto / 100)))}}</span>
+                    <span class="valor-original">de {{moedas[moeda].simbolo}} {{formatarValor(carro.valor)}}</span><br>
+                    por <span class="valor"><small>{{moedas[moeda].simbolo}}</small> {{(formatarValor(carro.valor * (1 - (carro.desconto / 100))))}}</span>
                   </div>
                   <div ng-if="carro.desconto <= 0">
-                    <span class="valor"><small>R$</small> {{carro.valor}}</span>
+                    <span class="valor"><small>{{moedas[moeda].simbolo}}</small> {{formatarValor(carro.valor)}}</span>
                   </div>
                   <strong><span class="parcelamento">em até 10x</span></strong>
 

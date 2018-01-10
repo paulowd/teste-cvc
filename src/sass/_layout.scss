@@ -99,6 +99,13 @@ article.item-resultado-busca {
       border-top: 1px solid rgba(0,0,0,.1);
       border-left: 1px solid rgba(0,0,0,.1);
     }
+
+    &.sample-show-hide {
+      transition: all linear 0.5s;
+      &.ng-hide {
+        opacity: 0;
+      }
+    }
   }
 
   .info-locacao {
