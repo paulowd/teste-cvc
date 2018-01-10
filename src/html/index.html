@@ -68,10 +68,12 @@
               <div class="field-group filter-field">
                 <label for="cmb-ipp">Itens por página</label>
                 <div class="wrap-select">
-                  <select id="cmb-ipp">
+                  <select id="cmb-ipp" ng-model="pagination.itemsPerPage" ng-change="atualizarPagination()">
+                    <option value="2">2</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
                     <option value="50">50</option>
+                    <option value="100">100</option>
                   </select>
                 </div>
               </div>
@@ -104,7 +106,7 @@
           </div>
 
           <div class="resultados-busca">
-            <article class="row item-resultado-busca" ng-repeat="carro in carros">
+            <article class="row item-resultado-busca" ng-repeat="carro in carros | startFrom:(pagination.page - 1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage ">
               <div class="grid-xs-12 grid-md-9">
                 <div class="row">
                   <div class="grid-xs-12 grid-md-5 foto-carro">
@@ -158,11 +160,9 @@
             </article>
 
             <ul class="pagination">
-              <li><a href="#">&laquo;</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">&raquo;</a></li>
+              <li><button ng-click="alterarPagina(pagination.page - 1)">&laquo;</button></li>
+              <li ng-repeat="n in [] | rangePagination:pagination.totalPages"><button ng-class="n == pagination.page? 'active' : ''" ng-click="alterarPagina(n)">{{n}}</a></li>
+              <li><button ng-click="alterarPagina(pagination.page + 1)">&raquo;</button></li>
             </ul>
           </div>
 

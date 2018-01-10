@@ -5,10 +5,30 @@ angular.module('testecvc').controller('CarrosController', ['$scope', 'orderByFil
 	$scope.mensagem = '';
 	$scope.ordem_param = 'none';
 
+	$scope.pagination = {
+		itemsPerPage: '2',
+		page: 1,
+		totalItems: 0,
+		totalPages: 1
+	}
+
+	$scope.alterarPagina = function(i){
+		if(i<1)
+			i=1;
+		
+		if(i>$scope.pagination.totalPages)
+			i=$scope.pagination.totalPages;
+		$scope.pagination.page = i;
+	}
+
+	$scope.atualizarPagination = function(){
+		$scope.pagination.totalItems = $scope.carros.length;
+		$scope.pagination.totalPages = Math.ceil($scope.carros.length / $scope.pagination.itemsPerPage);
+	}
 
 	carrosResource.query(function(carros) {
-		console.log('carros', carros);
 		$scope.carros = carros;
+		$scope.atualizarPagination();
 	}, function(erro) {
 		console.log(erro);
 	});
