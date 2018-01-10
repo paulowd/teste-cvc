@@ -9,6 +9,8 @@ Description: Tema criado para o site institucional da Petutinha
 @import
         "variables",            // Definição de variáveis relativas ao layout
         "mixins",               // Mixins utilizados no Sass
+        "reset",                // Reset de elementos html
+        "components",            // Componentes basicos do layout
         "grid",                 // Grid do layout
         "layout"                // Layout
 ;

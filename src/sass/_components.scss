@@ -1,0 +1,248 @@
+/***
+  * Classes auxiliares de texto
+*/
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-upper {
+  text-transform: uppercase;
+}
+
+.text-lower {
+  text-transform: lowercase;
+}
+
+/***
+  * Padrões sidebar
+*/
+
+.aside-box {
+  padding: 10px;
+
+  &.yellow {
+    background: $yellow;
+  }
+}
+
+
+/***
+  * Painéis
+*/
+
+.panel {
+  .panel-header, .panel-body {
+    padding: 5px 10px;
+  }
+
+  .panel-body {
+    background: rgba(255,255,255,.5);
+  }
+
+  &.panel-green {
+    .panel-header {
+      background: $green;
+      color: #fff;
+    }
+
+    .panel-body {
+      border: 1px solid $green;
+    }
+  }
+}
+
+
+/***
+  * Classes auxiliares de botões
+*/
+.btn {
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  @include transition(.2s);
+
+  &.btn-xs {
+    height: 20px;
+    line-height: 20px;
+    font-size: 10px;
+  }
+
+  &.btn-sm {
+    height: 30px;
+    line-height: 30px;
+    font-size: 11px;
+  }
+
+  &.btn-lg {
+    height: 50px;
+    line-height: 50px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  &.btn-block {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+
+  &.btn-blue {
+    @include btn-color($blue, lighten($blue, 7%), #fff);
+  }
+
+  &.btn-green {
+    @include btn-color($green, lighten($green, 7%), #fff);
+  }
+
+  &.btn-yellow {
+    @include btn-color($yellow, lighten($yellow, 7%), darken($yellow, 80%));
+  }
+}
+
+
+/***
+  * Classes auxiliares de formulários
+*/
+
+.field-group {
+  padding-bottom: 10px;
+
+  label {
+    font-size: 10px;
+    color: rgba(0,0,0,.8);
+  }
+
+  input[type=text],
+  input[type=password],
+  input[type=email],
+  input[type=number], {
+    height: 38px;
+    line-height: 38px;
+    padding: 0 10px;
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,.3);
+
+    &:focus {
+      border-color: $blue-highlight;
+    }
+  }
+
+  .checkbox-group {
+    display: inline-block;
+    padding-right: 10px;
+
+    label {
+      font-size: 12px;
+      color: $blue;
+      position: relative;
+      top: -2px;
+      cursor: pointer;
+    }
+
+    input:checked + label {
+      font-weight: bold;
+    }
+
+    input {
+      width: 12px;
+      height: 12px;
+      cursor: pointer;
+    }
+  }
+
+  &.label-upper {
+    text-transform: uppercase;
+  }
+
+  &.field-block {
+    input {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  &:last-child {
+    padding: 0;
+  }
+
+  &.filter-field {
+    border: 1px solid rgba(0,0,0,.1);
+    padding: 0 5px;
+    display: table;
+    width: 100%;
+    @include clear(0);
+
+    label {
+      text-transform: uppercase;
+      color: $blue;
+      white-space:nowrap;
+    }
+    
+    label, input, select, .wrap-select {
+      border: 0;
+      line-height: 38px;
+      height: 38px;
+      display: table-cell;
+    }
+
+    .wrap-select {
+      width: 99%;
+    }
+
+    select {
+      display: block;
+      width: 100%;
+      font-size: 14px;
+    }
+  }
+}
+
+
+ul.pagination {
+  text-align: center;
+  li {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+
+    a {
+      display: block;
+      padding: 0;
+      margin: 0;
+      text-decoration: none;
+      color: $blue-highlight;
+      font-size: 14px;
+      @include transition(.2s);
+
+      &:hover, &.active {
+        background: #eee;
+        color: #000;
+      }
+
+      &.active {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+
+
+
+.icon {
+  display: inline-block;
+}

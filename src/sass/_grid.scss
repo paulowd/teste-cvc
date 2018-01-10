@@ -17,6 +17,7 @@ $container-lg: 1100px; // Tamanho do container
 }
 
 .row {
+  clear: both;
   margin: 0 ( 0 - $grid-gutter );
 }
 
