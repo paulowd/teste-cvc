@@ -1,4 +1,4 @@
-angular.module('testecvc').controller('CarrosController', ['$scope', 'orderByFilter', 'carrosResource', function($scope, orderBy, carrosResource) {
+angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScroll', 'orderByFilter', 'carrosResource', function($scope, $anchorScroll, orderBy, carrosResource) {
 	
 	$scope.carros = [];
 	$scope.filtro = '';
@@ -19,6 +19,7 @@ angular.module('testecvc').controller('CarrosController', ['$scope', 'orderByFil
 		if(i>$scope.pagination.totalPages)
 			i=$scope.pagination.totalPages;
 		$scope.pagination.page = i;
+		$anchorScroll('resultados-busca');
 	}
 
 	$scope.atualizarPagination = function(){
@@ -32,6 +33,10 @@ angular.module('testecvc').controller('CarrosController', ['$scope', 'orderByFil
 	}, function(erro) {
 		console.log(erro);
 	});
+
+	$scope.toggleDetalhe = function(carro){
+		carro.showDetalhe = ! carro.showDetalhe;
+	}
 
 	$scope.reordenar = function(){
 		switch($scope.ordem_param){

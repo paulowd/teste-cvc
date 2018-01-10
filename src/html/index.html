@@ -105,7 +105,7 @@
             </div>
           </div>
 
-          <div class="resultados-busca">
+          <div id="resultados-busca">
             <article class="row item-resultado-busca" ng-repeat="carro in carros | startFrom:(pagination.page - 1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage ">
               <div class="grid-xs-12 grid-md-9">
                 <div class="row">
@@ -125,13 +125,14 @@
                       <li ng-repeat="destaque in carro.destaques">{{destaque}}</li>
                     </ul>
 
-                    <a href="#" class="btn-detalhe">Ver detalhes <i class="fa fa-plus"></i></a>
+                    <a href="#" class="btn-detalhe" ng-click="toggleDetalhe(carro)" ng-show="! carro.showDetalhe">Ver detalhes <i class="fa fa-plus"></i></a>
+                    <a href="#" class="btn-detalhe" ng-click="toggleDetalhe(carro)" ng-show="carro.showDetalhe">Ocultar detalhes <i class="fa fa-times"></i></a>
 
                     <a href="#" class="btn-favorito"><i class="fa fa-heart"></i></a>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="grid-xs-12 detalhe-locacao">
+                  <div class="grid-xs-12 detalhe-locacao" ng-show="carro.showDetalhe">
                       {{carro.detalhes}}
                   </div>
                   <div class="grid-xs-12">
