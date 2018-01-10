@@ -9,9 +9,11 @@
   <link rel="stylesheet" href="assets/sprite/sprite.css">
 
   <script src="https://use.fontawesome.com/6ff298b380.js"></script>
+  <script src="assets/js/angular.js"></script>
+  <script src="assets/js/cvc-carros-debug.js"></script>
 </head>
 <body>
-  <main>
+  <main ng-app="testecvc" ng-controller="CarrosController">
     <div class="container">
       <div class="row">
         <aside class="grid-xs-12 grid-md-3">
@@ -78,10 +80,11 @@
               <div class="field-group filter-field">
                 <label for="cmb-ipp">Ordenar por</label>
                 <div class="wrap-select">
-                  <select id="cmb-ipp">
-                    <option value="10">Menor preço</option>
-                    <option value="20">Maior preço</option>
-                    <option value="50">Mais alugado</option>
+                  <select id="cmb-ipp" ng-change="reordenar()" ng-model="ordem_param">
+                    <option value="none">Nenhum</option>
+                    <option value="low_price">Menor preço</option>
+                    <option value="high_price">Maior preço</option>
+                    <option value="high_locate">Mais alugado</option>
                   </select>
                 </div>
               </div>
@@ -101,26 +104,23 @@
           </div>
 
           <div class="resultados-busca">
-            <article class="row item-resultado-busca">
+            <article class="row item-resultado-busca" ng-repeat="carro in carros">
               <div class="grid-xs-12 grid-md-9">
                 <div class="row">
                   <div class="grid-xs-12 grid-md-5 foto-carro">
-                    <img src="assets/img/carros/carro-1.jpg" alt="">
+                    <img src="assets/img/carros/{{carro.imageUrl}}" alt="">
                     <div class="locadora">
-                      <img src="assets/img/locadoras/hertz.jpg" alt="Hertz">
+                      <img src="assets/img/locadoras/{{carro.locadora}}.jpg" alt="{{carro.locadora}}">
                     </div>
                   </div>
                   <div class="grid-xs-12 grid-md-7 info-locacao">
-                    <h1>Carro economico</h1>
+                    <h1>{{carro.name}}</h1>
                     <p class="descricao text-upper">
-                      Código da taxa: dsa<br>
-                      fsdfsd
+                      Código da taxa: {{carro.codigo}}<br>
+                      {{carro.descricao}}
                     </p>
                     <ul class="lista-destaques">
-                      <li>eqw</li>
-                      <li>eqw</li>
-                      <li>eqw</li>
-                      <li>eqw</li>
+                      <li ng-repeat="destaque in carro.destaques">{{destaque}}</li>
                     </ul>
 
                     <a href="#" class="btn-detalhe">Ver detalhes <i class="fa fa-plus"></i></a>
@@ -130,15 +130,11 @@
                 </div>
                 <div class="row">
                   <div class="grid-xs-12 detalhe-locacao">
-                      Super inclusive promocional - Km livre, seguro total do veículo (LDW), seguro a terceiros (SLI), taxas de serviços inclusas e 1 motorista adicional.
+                      {{carro.detalhes}}
                   </div>
                   <div class="grid-xs-12">
                     <ul class="lista-opcionais">
-                      <li><i class="icon icon-portas"></i> 4 portas</li>
-                      <li><i class="icon icon-ar"></i> Ar</li>
-                      <li>A</li>
-                      <li>das</li>
-                      <li>sad</li>
+                      <li ng-repeat="opcional in carro.opcionais"><i class="icon icon-{{ opcional.icone }}"></i> {{opcional.texto}}</li>
                     </ul>
                   </div>
                 </div>
@@ -146,8 +142,13 @@
               <div class="grid-xs-12 grid-md-3">
                 <div class="info-valor-locacao aside-box yellow text-center">
                   <h3>Total da Locação</h3>
-                  <span class="valor-original">de R$ 938</span><br>
-                  por <span class="valor"><small>R$</small> 838</span><br>
+                  <div ng-if="carro.desconto > 0">
+                    <span class="valor-original">de R$ {{carro.valor}}</span><br>
+                    por <span class="valor"><small>R$</small> {{(carro.valor * (1 - (carro.desconto / 100)))}}</span>
+                  </div>
+                  <div ng-if="carro.desconto <= 0">
+                    <span class="valor"><small>R$</small> {{carro.valor}}</span>
+                  </div>
                   <strong><span class="parcelamento">em até 10x</span></strong>
 
                   <a href="#" class="btn btn-lg btn-blue btn-block text-upper">Alugar</a>

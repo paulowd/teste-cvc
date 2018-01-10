@@ -1,0 +1,1 @@
+angular.module('testecvc', ['carrosDirectives','ngAnimate', 'ngResource', 'carrosServices']);

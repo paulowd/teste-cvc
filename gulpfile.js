@@ -3,9 +3,8 @@ var gulp = require('gulp'),
   sourcemaps = require('gulp-sourcemaps'),
   minify = require('gulp-minify'),
   concat = require('gulp-concat'),
-  runSequence = require('run-sequence');
-  
-var spritesmith = require('gulp.spritesmith');
+  runSequence = require('run-sequence'),
+  spritesmith = require('gulp.spritesmith');
 
 // Declara caminho dos diretórios de arquivos fontes
 // e seus respectivos destinos após o build
@@ -20,15 +19,12 @@ var path = {
   html_dist: './public/',
   fonts_src: 'src/fonts/',
   fonts_dist: 'public/assets/fonts/',
-  node: 'node_modules'
+  node: 'node_modules/',
+  sprite: 'src/sprite/'
 };
 
 gulp.task('scripts', function() {
-  gulp.src(
-      [
-        // path.js_src + '.js',
-      ]
-    )
+  gulp.src([path.js_src + '**/*.js'])
     .pipe(concat('cvc-carros.js'))
     .pipe(minify({
       ext: {
@@ -69,16 +65,23 @@ gulp.task('watch', function() {
   gulp.watch(path.js_src + '**/*', ['scripts']);
   gulp.watch(path.html_src + '**/*', ['html']);
   gulp.watch(path.img_src + '**/*', ['img']);
+  gulp.watch(path.sprite + '*.png', ['sprite']);
+});
+
+gulp.task('copy_angular', function() {
+  gulp.src([path.node + 'angular/angular.min.js', path.node + 'angular-resource/angular-resource.min.js', path.node + 'angular-animate/angular-animate.min.js'])
+    .pipe(concat('angular.js'))
+    .pipe(gulp.dest(path.js_dist));
 });
 
 gulp.task('build', function(callback) {
-  runSequence('styles', 'html', 'img', callback);
+  runSequence('styles', 'sprite', 'copy_angular', 'scripts', 'html', 'img', callback);
 });
 
 gulp.task('sprite', function () {
-  var spriteData = gulp.src('src/sprite/*.png').pipe(spritesmith({
+  var spriteData = gulp.src(path.sprite + '*.png').pipe(spritesmith({
     imgName: 'sprite.png',
     cssName: 'sprite.css'
   }));
-  return spriteData.pipe(gulp.dest('public/assets/sprite/'));
+  spriteData.pipe(gulp.dest('public/assets/sprite/'));
 });

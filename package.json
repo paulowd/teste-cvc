@@ -16,6 +16,9 @@
     "run-sequence": "^2.2.1"
   },
   "dependencies": {
+    "angular": "^1.6.8",
+    "angular-animate": "^1.6.8",
+    "angular-resource": "^1.6.8",
     "express": "^4.16.2"
   }
 }
