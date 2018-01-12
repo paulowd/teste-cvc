@@ -6,6 +6,7 @@ angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScr
 	$scope.mensagem = '';
 	$scope.ordem_param = 'none';
 	$scope.moeda = 'real';
+	$scope.devolverOutroLocal = false;
 
 	$scope.moedas = {
 		real: {

@@ -19,30 +19,43 @@
       <div class="row">
         <aside class="grid-xs-12 grid-md-3">
           <div class="aside-box yellow">
-            <form id="form-busca-carros">
+            <form name="formBuscaCarros" id="form-busca-carros">
               <div class="field-group field-block label-upper">
                 <label for="txt-local-retirada">Local de retirada</label>
                 <md-autocomplete 
-                  md-min-length="0" 
-                  md-selected-item="selectedItem" 
-                  md-search-text="searchText" 
-                  md-items="item in queryEstado(searchText)" 
+                  required
                   placeholder="Escolha uma cidade"
+                  md-input-name="localRetirada"
+                  md-min-length="0" 
+                  md-selected-item="local.retirada" 
+                  md-search-text="localRetirada" 
+                  md-items="item in queryEstado(localRetirada)" 
                   md-item-text="item.capital">
                   <md-item-template>
-                    <span md-highlight-text="searchText">{{item.capital}}</span>
+                    <span md-highlight-text="localRetirada">{{item.capital}}</span>
                   </md-item-template>
                 </md-autocomplete>
               </div>
               <div class="field-group">
                 <div class="checkbox-group">
-                  <input type="checkbox" id="opt-devolver">
+                  <input type="checkbox" id="opt-devolver" ng-model="devolverOutroLocal">
                   <label for="opt-devolver">Devolver o carro em outro local</label>
                 </div>
               </div>
-              <div class="field-group field-block label-upper">
-                <label for="txt-local-devolucao">Local de devolução</label>
-                <input id="txt-local-devolucao" type="text" placeholder="Escolha um local para devolver o veículo">
+              <div class="field-group field-block label-upper" ng-show="devolverOutroLocal">
+                <md-autocomplete 
+                  md-min-length="0" 
+                  md-selected-item="local.devolucao" 
+                  md-search-text="localDevolucao" 
+                  md-items="item in queryEstado(localDevolucao)" 
+                  placeholder="Escolha uma cidade"
+                  md-item-text="item.capital"
+                  ng-model="local.devolucao"
+                  >
+                  <md-item-template>
+                    <span md-highlight-text="localDevolucao">{{item.capital}}</span>
+                  </md-item-template>
+                </md-autocomplete>
               </div>
               <div class="field-group field-block label-upper">
                 <label for="">Local de retirada</label>
