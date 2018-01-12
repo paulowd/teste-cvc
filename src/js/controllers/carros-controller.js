@@ -6,7 +6,28 @@ angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScr
 	$scope.mensagem = '';
 	$scope.ordem_param = 'none';
 	$scope.moeda = 'real';
+	$scope.diasLocacao = 1;
 	$scope.devolverOutroLocal = false;
+
+	var data_atual = new Date();
+	$scope.dataLocacao = data_atual;
+	$scope.minDataLocacao = data_atual;
+	$scope.maxDataLocacao = moment(data_atual, "DD/MM/YYYY").add(3, 'months').toDate();;
+
+	$scope.calcularLimitesDataDevolucao = function(){
+		var dataLocacao = $scope.dataLocacao;
+		$scope.minDataDevolucao = moment(dataLocacao, "DD/MM/YYYY").add(1, 'days').toDate();
+		$scope.dataDevolucao = moment(dataLocacao, "DD/MM/YYYY").add(2, 'days').toDate();
+		$scope.maxDataDevolucao = moment(dataLocacao, "DD/MM/YYYY").add(30, 'days').toDate();
+	}
+
+	$scope.calcularDiasLocacao = function() {
+		$scope.diasLocacao = moment($scope.dataDevolucao).diff($scope.dataLocacao, 'days');
+	}
+
+	$scope.calcularLimitesDataDevolucao();
+	$scope.calcularDiasLocacao();
+
 
 	$scope.moedas = {
 		real: {
@@ -92,4 +113,9 @@ angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScr
 		return numberToMoney( valor * $scope.moedas[$scope.moeda].cotacao );
 	}
 
-}]);
+}])
+.config(function($mdDateLocaleProvider) {
+	$mdDateLocaleProvider.formatDate = function(date) {
+		return moment(date).format('DD/MM/YYYY');
+	};
+});

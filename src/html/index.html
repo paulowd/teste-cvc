@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/sprite/sprite.css">
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
   <script src="https://use.fontawesome.com/6ff298b380.js"></script>
   <script src="assets/js/angular.js"></script>
   <script src="assets/js/cvc-carros-debug.js"></script>
@@ -60,6 +62,26 @@
               <div class="field-group field-block label-upper">
                 <label for="">Local de retirada</label>
                 <input id="" type="text" placeholder="Escolha um local para retirar o veículo">
+              </div>
+              <div class="field-group field-block label-upper">
+                <label for="">Retirada</label>
+                <md-datepicker 
+                  ng-model="dataLocacao" 
+                  md-open-on-focus
+                  md-min-date="minDataLocacao"
+                  md-max-date="maxDataLocacao"
+                  ng-change="calcularLimitesDataDevolucao()">
+                </md-datepicker>
+              </div>
+              <div class="field-group field-block label-upper">
+                <label for="">Devolução - {{diasLocacao}} dia(s)</label>
+                <md-datepicker 
+                  ng-model="dataDevolucao" 
+                  md-open-on-focus
+                  md-min-date="minDataDevolucao"
+                  md-max-date="maxDataDevolucao"
+                  ng-change="calcularDiasLocacao()">
+                </md-datepicker>
               </div>
 
               <div class="panel panel-green">
