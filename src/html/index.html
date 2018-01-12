@@ -68,12 +68,13 @@
                 <div class="like-input">
                   <md-datepicker 
                     md-hide-icons="triangle"
-                    ng-model="dataLocacao" 
+                    ng-model="dataRetirada" 
                     md-open-on-focus
-                    md-min-date="minDataLocacao"
-                    md-max-date="maxDataLocacao"
+                    md-min-date="minDataRetirada"
+                    md-max-date="maxDataRetirada"
                     ng-change="calcularLimitesDataDevolucao()">
                   </md-datepicker>
+                  <select name="" id="" ng-options="x for x in opcoesHorarios" ng-model="horarioRetirada"></select>
                 </div>
               </div>
               <div class="field-group label-upper">
@@ -88,6 +89,7 @@
                     md-max-date="maxDataDevolucao"
                     ng-change="calcularDiasLocacao()">
                   </md-datepicker>
+                  <select name="" id="" ng-options="x for x in opcoesHorarios" ng-model="horarioDevolucao"></select>
                 </div>
               </div>
 

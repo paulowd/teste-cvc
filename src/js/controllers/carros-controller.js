@@ -8,14 +8,22 @@ angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScr
 	$scope.moeda = 'real';
 	$scope.diasLocacao = 1;
 	$scope.devolverOutroLocal = false;
+	$scope.opcoesHorarios = [];
+	for(i=0; i<24; i++){
+		let hora = i < 10 ? '0' + i : i;
+		$scope.opcoesHorarios.push(hora + ':00');
+		$scope.opcoesHorarios.push(hora + ':30');
+	}
+	$scope.horarioRetirada = '08:00'
+	$scope.horarioDevolucao = '13:00'
 
 	var data_atual = new Date();
-	$scope.dataLocacao = data_atual;
-	$scope.minDataLocacao = data_atual;
-	$scope.maxDataLocacao = moment(data_atual, "DD/MM/YYYY").add(3, 'months').toDate();;
+	$scope.dataRetirada = data_atual;
+	$scope.minDataRetirada = data_atual;
+	$scope.maxDataRetirada = moment(data_atual, "DD/MM/YYYY").add(3, 'months').toDate();;
 
 	$scope.calcularLimitesDataDevolucao = function(){
-		var dataLocacao = $scope.dataLocacao;
+		var dataLocacao = $scope.dataRetirada;
 		$scope.minDataDevolucao = moment(dataLocacao, "DD/MM/YYYY").add(1, 'days').toDate();
 		$scope.dataDevolucao = moment(dataLocacao, "DD/MM/YYYY").add(2, 'days').toDate();
 		$scope.maxDataDevolucao = moment(dataLocacao, "DD/MM/YYYY").add(30, 'days').toDate();

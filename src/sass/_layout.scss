@@ -12,10 +12,6 @@ main {
   .panel {
     margin-bottom: 10px;
   }
-
-  md-autocomplete.like-input {
-    padding: 0;
-  }
   
   md-autocomplete md-autocomplete-wrap,
   md-autocomplete input:not(.md-input) {
@@ -26,9 +22,13 @@ main {
   }
 
   md-datepicker {
-    width: 70%;
+    width: 60%;
     display: inline-block;
     padding: 0;
+    position: relative;
+    overflow: visible;
+    margin-right: 15px;
+
     .md-icon-button+.md-datepicker-input-container {
       margin: 0;
     }
@@ -36,9 +36,20 @@ main {
       float: right;
     }
 
+    &:after {
+      position: absolute;
+      width: 1px;
+      height: 20px;
+      top: calc(50% - 10px);
+      right: 0px;
+      content: " ";
+      background: #aaa;
+      display: block;
+    }
+
     .md-datepicker-input {
-      width: 100px;
-      min-width: 100px;
+      width: 80px;
+      min-width: 80px;
       display: block;
       color: $blue-text;
     }
