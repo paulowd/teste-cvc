@@ -27,7 +27,7 @@ angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScr
 	}
 
 	$scope.pagination = {
-		itemsPerPage: '2',
+		itemsPerPage: '10',
 		page: 1,
 		totalItems: 0,
 		totalPages: 1
