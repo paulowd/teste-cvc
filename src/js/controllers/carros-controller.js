@@ -1,4 +1,11 @@
 angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScroll', 'orderByFilter', 'carrosResource', 'estadosResource', function($scope, $anchorScroll, orderBy, carrosResource, estadosResource) {
+
+	$scope.feedbackAtualizacaoLista = false;
+	$scope.atualizarLista = function()
+	{
+		$scope.feedbackAtualizacaoLista = true;
+		setTimeout(function(){ $scope.feedbackAtualizacaoLista = false; $scope.$apply(); }, 500);
+	}
 	
 	$scope.carros = [];
 	$scope.estados = [];
@@ -27,10 +34,12 @@ angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScr
 		$scope.minDataDevolucao = moment(dataLocacao, "DD/MM/YYYY").add(1, 'days').toDate();
 		$scope.dataDevolucao = moment(dataLocacao, "DD/MM/YYYY").add(2, 'days').toDate();
 		$scope.maxDataDevolucao = moment(dataLocacao, "DD/MM/YYYY").add(30, 'days').toDate();
+		$scope.atualizarLista();
 	}
 
 	$scope.calcularDiasLocacao = function() {
 		$scope.diasLocacao = moment($scope.dataDevolucao).diff($scope.dataLocacao, 'days');
+		$scope.atualizarLista();
 	}
 
 	$scope.calcularLimitesDataDevolucao();
@@ -73,6 +82,7 @@ angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScr
 	}
 
 	$scope.atualizarPagination = function(){
+		$scope.atualizarLista();
 		$scope.pagination.totalItems = $scope.carros.length;
 		$scope.pagination.totalPages = Math.ceil($scope.carros.length / $scope.pagination.itemsPerPage);
 	}
@@ -101,6 +111,7 @@ angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScr
 	}
 
 	$scope.reordenar = function(){
+		$scope.atualizarLista();
 		switch($scope.ordem_param){
 			case 'low_price':
 				$scope.carros = orderBy($scope.carros, 'valor', true);

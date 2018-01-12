@@ -61,6 +61,25 @@ main {
   }
 }
 
+
+#resultados-busca {
+  position: relative;
+  clear: both;
+  .feedback-atualziacao {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    background: rgba(255,255,255,.9);
+    font-size: 30px;
+    text-align: center;
+    color: $blue-text;
+    z-index: 150;
+  }
+}
+
 article.item-resultado-busca {
   border: 1px solid rgba(0,0,0,.1);
   margin: 0;

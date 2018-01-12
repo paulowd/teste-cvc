@@ -111,7 +111,7 @@
                 </div>
               </div>
 
-              <button class="btn btn-block btn-blue btn-lg text-upper">
+              <button class="btn btn-block btn-blue btn-lg text-upper" ng-click="atualizarLista()">
                 Buscar
               </button>
             </form>
@@ -160,6 +160,10 @@
           </div>
 
           <div id="resultados-busca">
+            <div class="feedback-atualziacao" ng-show="feedbackAtualizacaoLista">
+              Atualizando resultados...
+            </div>
+
             <article class="row item-resultado-busca" ng-repeat="carro in carros | startFrom:(pagination.page - 1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage ">
               <div class="grid-xs-12 grid-md-9">
                 <div class="row">
