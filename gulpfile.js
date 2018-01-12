@@ -58,16 +58,6 @@ gulp.task('img', function() {
     .pipe(gulp.dest(path.img_dist));
 });
 
-gulp.task('watch', function() {
-  gulp.run('build');
-
-  gulp.watch(path.css_src + '**/*', ['styles']);
-  gulp.watch(path.js_src + '**/*', ['scripts']);
-  gulp.watch(path.html_src + '**/*', ['html']);
-  gulp.watch(path.img_src + '**/*', ['img']);
-  gulp.watch(path.sprite + '*.png', ['sprite']);
-});
-
 gulp.task('copy_angular', function() {
   gulp.src(
     [
@@ -89,8 +79,9 @@ gulp.task('copy_angular', function() {
     
 });
 
-gulp.task('build', function(callback) {
-  runSequence('styles', 'sprite', 'copy_angular', 'scripts', 'html', 'img', callback);
+gulp.task('copy_fonts', function() {
+  gulp.src(path.fonts_src + '*')
+    .pipe(gulp.dest(path.fonts_dist));    
 });
 
 gulp.task('sprite', function () {
@@ -99,4 +90,19 @@ gulp.task('sprite', function () {
     cssName: 'sprite.css'
   }));
   spriteData.pipe(gulp.dest('public/assets/sprite/'));
+});
+
+gulp.task('build', function(callback) {
+  runSequence('styles', 'copy_fonts', 'sprite', 'copy_angular', 'scripts', 'html', 'img', callback);
+});
+
+gulp.task('watch', function() {
+  gulp.run('build');
+
+  gulp.watch(path.css_src + '**/*', ['styles']);
+  gulp.watch(path.js_src + '**/*', ['scripts']);
+  gulp.watch(path.html_src + '**/*', ['html']);
+  gulp.watch(path.img_src + '**/*', ['img']);
+  gulp.watch(path.sprite + '*.png', ['sprite']);
+  gulp.watch(path.fonts_src + '*', ['copy_fonts']);
 });
