@@ -20,7 +20,7 @@ angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScr
 	var data_atual = new Date();
 	$scope.dataRetirada = data_atual;
 	$scope.minDataRetirada = data_atual;
-	$scope.maxDataRetirada = moment(data_atual, "DD/MM/YYYY").add(3, 'months').toDate();;
+	$scope.maxDataRetirada = moment(data_atual, "DD/MM/YYYY").add(3, 'months').toDate();
 
 	$scope.calcularLimitesDataDevolucao = function(){
 		var dataLocacao = $scope.dataRetirada;
@@ -119,6 +119,10 @@ angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScr
 
 	$scope.formatarValor = function(valor) {
 		return numberToMoney( valor * $scope.moedas[$scope.moeda].cotacao );
+	}
+
+	$scope.favoritarCarro = function (carro) {
+		carro.favorito = ! carro.favorito;
 	}
 
 }])

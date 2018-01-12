@@ -182,7 +182,7 @@
                     <a href="#" class="btn-detalhe" ng-click="toggleDetalhe(carro)" ng-show="! carro.showDetalhe">Ver detalhes <i class="fa fa-plus"></i></a>
                     <a href="#" class="btn-detalhe" ng-click="toggleDetalhe(carro)" ng-show="carro.showDetalhe">Ocultar detalhes <i class="fa fa-times"></i></a>
 
-                    <a href="#" class="btn-favorito"><i class="fa fa-heart"></i></a>
+                    <a href="#" class="btn-favorito" ng-class="{active:carro.favorito}" ng-click="favoritarCarro(carro)"><i class="fa fa-heart"></i></a>
                   </div>
                 </div>
                 <div class="row">
