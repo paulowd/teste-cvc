@@ -12,6 +12,52 @@ main {
   .panel {
     margin-bottom: 10px;
   }
+  
+  md-autocomplete md-autocomplete-wrap,
+  md-autocomplete input:not(.md-input) {
+    box-shadow: none;
+    height: 38px;
+    line-height: 38px;
+    color: $blue-text;
+  }
+
+  md-datepicker {
+    width: 60%;
+    display: inline-block;
+    padding: 0;
+    position: relative;
+    overflow: visible;
+    margin-right: 15px;
+
+    .md-icon-button+.md-datepicker-input-container {
+      margin: 0;
+    }
+    .md-button.md-icon-button {
+      float: right;
+    }
+
+    &:after {
+      position: absolute;
+      width: 1px;
+      height: 20px;
+      top: calc(50% - 10px);
+      right: 0px;
+      content: " ";
+      background: #aaa;
+      display: block;
+    }
+
+    .md-datepicker-input {
+      width: 80px;
+      min-width: 80px;
+      display: block;
+      color: $blue-text;
+    }
+
+    md-icon {
+      fill: $blue-text;
+    }
+  }
 }
 
 article.item-resultado-busca {
@@ -98,6 +144,13 @@ article.item-resultado-busca {
       content: " ";
       border-top: 1px solid rgba(0,0,0,.1);
       border-left: 1px solid rgba(0,0,0,.1);
+    }
+
+    &.sample-show-hide {
+      transition: all linear 0.5s;
+      &.ng-hide {
+        opacity: 0;
+      }
     }
   }
 
