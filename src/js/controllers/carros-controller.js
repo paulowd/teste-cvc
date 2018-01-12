@@ -46,12 +46,12 @@ angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScr
 		dolar: {
 			nome: 'Dolar',
 			simbolo: 'U$',
-			cotacao: 2
+			cotacao: 0.7
 		},
 		euro: {
 			nome: 'Euro',
 			simbolo: '€',
-			cotacao: 3
+			cotacao: 0.4
 		},
 	}
 
