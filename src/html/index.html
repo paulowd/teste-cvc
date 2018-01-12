@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Teste CVC - Aluguel de Veículos</title>
+  <link rel="stylesheet" href="assets/css/angular-material.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/sprite/sprite.css">
 
@@ -21,7 +22,17 @@
             <form id="form-busca-carros">
               <div class="field-group field-block label-upper">
                 <label for="txt-local-retirada">Local de retirada</label>
-                <input id="txt-local-retirada" type="text" placeholder="Escolha um local para retirar o veículo">
+                <md-autocomplete 
+                  md-min-length="0" 
+                  md-selected-item="selectedItem" 
+                  md-search-text="searchText" 
+                  md-items="item in queryEstado(searchText)" 
+                  placeholder="Escolha uma cidade"
+                  md-item-text="item.capital">
+                  <md-item-template>
+                    <span md-highlight-text="searchText">{{item.capital}}</span>
+                  </md-item-template>
+                </md-autocomplete>
               </div>
               <div class="field-group">
                 <div class="checkbox-group">

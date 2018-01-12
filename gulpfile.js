@@ -69,9 +69,24 @@ gulp.task('watch', function() {
 });
 
 gulp.task('copy_angular', function() {
-  gulp.src([path.node + 'angular/angular.min.js', path.node + 'angular-resource/angular-resource.min.js', path.node + 'angular-animate/angular-animate.min.js'])
+  gulp.src(
+    [
+      path.node + 'angular/angular.min.js', 
+      path.node + 'angular-resource/angular-resource.min.js', 
+      path.node + 'angular-animate/angular-animate.min.js', , 
+      path.node + 'angular-aria/angular-aria.min.js', 
+      path.node + 'angular-messages/angular-messages.min.js',
+      path.node + 'angular-material/angular-material.min.js'
+    ])
     .pipe(concat('angular.js'))
     .pipe(gulp.dest(path.js_dist));
+
+    gulp.src(
+        path.node + 'angular-material/angular-material.min.css'
+      )
+      .pipe(gulp.dest(path.css_dist));
+
+    
 });
 
 gulp.task('build', function(callback) {

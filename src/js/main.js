@@ -1,4 +1,4 @@
-angular.module('testecvc', ['carrosDirectives','ngAnimate', 'ngResource', 'carrosServices'])
+angular.module('testecvc', ['carrosDirectives','ngAnimate', 'ngResource', 'ngMaterial', 'carrosServices'])
 	.filter('startFrom', function() {
 		return function(input, start) {
 				start = +start; //parse to int

@@ -1,6 +1,7 @@
-angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScroll', 'orderByFilter', 'carrosResource', function($scope, $anchorScroll, orderBy, carrosResource) {
+angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScroll', 'orderByFilter', 'carrosResource', 'estadosResource', function($scope, $anchorScroll, orderBy, carrosResource, estadosResource) {
 	
 	$scope.carros = [];
+	$scope.estados = [];
 	$scope.filtro = '';
 	$scope.mensagem = '';
 	$scope.ordem_param = 'none';
@@ -53,6 +54,18 @@ angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScr
 		console.log(erro);
 	});
 
+	estadosResource.query(function(estados) {
+		$scope.estados = estados;
+	}, function(erro) {
+		console.log(erro);
+	});
+
+	$scope.queryEstado = function(searchText) {
+		return $scope.estados.filter(function name(estado) {
+			return removeAcento(estado.capital).indexOf(removeAcento(searchText)) >= 0;
+		});
+	}
+
 	$scope.toggleDetalhe = function(carro){
 		carro.showDetalhe = ! carro.showDetalhe;
 	}
@@ -72,25 +85,6 @@ angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScr
 				$scope.carros = orderBy($scope.carros, 'id', false);
 				break;
 		}
-	}
-
-	$scope.remover = function(foto) {
-
-		recursoFoto.delete({fotoId: foto._id}, function() {
-			var indiceDaFoto = $scope.fotos.indexOf(foto);
-			$scope.fotos.splice(indiceDaFoto, 1);
-			$scope.mensagem = 'Foto ' + foto.titulo + ' removida com sucesso!';
-		}, function(erro) {
-			console.log(erro);
-			$scope.mensagem = 'Não foi possível apagar a foto ' + foto.titulo;
-		});
-	};
-
-
-	var numberToMoney = function(numero) {
-    var numero = numero.toFixed(2).split('.');
-    numero[0] = numero[0].split(/(?=(?:...)*$)/).join('.');
-    return numero.join(',');
 	}
 
 	$scope.formatarValor = function(valor) {
