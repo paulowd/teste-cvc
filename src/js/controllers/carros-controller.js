@@ -125,6 +125,11 @@ angular.module('testecvc').controller('CarrosController', ['$scope', '$anchorScr
 		carro.favorito = ! carro.favorito;
 	}
 
+	$scope.alugarCarro = function(carro)
+	{
+		carro.alugado = true;
+	}
+
 }])
 .config(function($mdDateLocaleProvider) {
 	$mdDateLocaleProvider.formatDate = function(date) {

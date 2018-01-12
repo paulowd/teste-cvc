@@ -197,19 +197,24 @@
                 </div>
               </div>
               <div class="grid-xs-12 grid-md-3">
-                <div class="info-valor-locacao aside-box yellow text-center">
-                  <h3>Total da Locação</h3>
-                  <div ng-if="carro.desconto > 0">
-                    <span class="valor-original">de {{moedas[moeda].simbolo}} {{formatarValor(carro.valor * diasLocacao)}}</span><br>
-                    por <span class="valor"><small>{{moedas[moeda].simbolo}}</small> {{(formatarValor(carro.valor * diasLocacao * (1 - (carro.desconto / 100))))}}</span>
-                  </div>
-                  <div ng-if="carro.desconto <= 0">
-                    <span class="valor"><small>{{moedas[moeda].simbolo}}</small> {{formatarValor(carro.valor * diasLocacao)}}</span>
-                  </div>
-                  <strong><span class="parcelamento">em até 10x</span></strong>
+                <div class="info-valor-locacao aside-box text-center" ng-class="{yellow:!carro.alugado, blue:carro.alugado}">
+                  <div ng-show="!carro.alugado">
+                    <h3>Total da Locação</h3>
+                    <div ng-if="carro.desconto > 0">
+                      <span class="valor-original">de {{moedas[moeda].simbolo}} {{formatarValor(carro.valor * diasLocacao)}}</span><br>
+                      por <span class="valor"><small>{{moedas[moeda].simbolo}}</small> {{(formatarValor(carro.valor * diasLocacao * (1 - (carro.desconto / 100))))}}</span>
+                    </div>
+                    <div ng-if="carro.desconto <= 0">
+                      <span class="valor"><small>{{moedas[moeda].simbolo}}</small> {{formatarValor(carro.valor * diasLocacao)}}</span>
+                    </div>
+                    <strong><span class="parcelamento">em até 10x</span></strong>
 
-                  <button class="btn btn-lg btn-blue btn-block text-upper">Alugar</button>
-                  <small>Taxas inclusas</small>
+                    <button class="btn btn-lg btn-blue btn-block text-upper" ng-click="alugarCarro(carro)">Alugar</button>
+                    <small>Taxas inclusas</small>
+                  </div>
+                  <div ng-show="carro.alugado">
+                    <h1>Carro alugado com sucesso!</h1>
+                  </div>
                 </div>
               </div>
             </article>
