@@ -4,7 +4,8 @@ var gulp = require('gulp'),
   minify = require('gulp-minify'),
   concat = require('gulp-concat'),
   runSequence = require('run-sequence'),
-  spritesmith = require('gulp.spritesmith');
+  spritesmith = require('gulp.spritesmith'),
+  ngAnnotate = require('gulp-ng-annotate');
 
 // Declara caminho dos diretórios de arquivos fontes
 // e seus respectivos destinos após o build
@@ -23,9 +24,16 @@ var path = {
   sprite: 'src/sprite/'
 };
 
+
+// Realiza o build dos scripts js
+// pegando todos arquivos da pasta
+// e concatenando em um unico arquivo
 gulp.task('scripts', function() {
   gulp.src([path.js_src + '**/*.js'])
     .pipe(concat('cvc-carros.js'))
+    .pipe(ngAnnotate({
+      add: true
+    }))
     .pipe(minify({
       ext: {
         src: '-debug.js',

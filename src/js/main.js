@@ -1,11 +1,11 @@
-angular.module('testecvc', ['carrosDirectives','ngAnimate', 'ngResource', 'ngMaterial', 'carrosServices'])
+angular.module('testecvc', ['ngAnimate', 'ngResource', 'ngMaterial', 'carrosServices'])
 	.filter('startFrom', function() {
 		return function(input, start) {
 				start = +start; //parse to int
 				return input.slice(start);
 		}
 	})
-	.filter('rangePagination', function() {
+	.filter(['rangePagination', function() {
 		return function(input, total) {
 			total = parseInt(total);
 	
@@ -15,4 +15,4 @@ angular.module('testecvc', ['carrosDirectives','ngAnimate', 'ngResource', 'ngMat
 	
 			return input;
 		};
-	});
+	}]);
