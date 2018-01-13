@@ -13,6 +13,10 @@ Este repositório foi criado com o intuito de armazenar o teste para a vaga de f
 
 \* O Express foi utilizado apenas para auxilio em servir os arquivos estáticos da pasta 'public' através do Node.JS
 
+## Preview
+
+O projeto pode ser pré-visualizado através da seguinte URL: https://paulowd.github.io/teste-cvc/
+
 ## Provisionamento
 
 Após baixar o repositório, instale as dependência via npm:
