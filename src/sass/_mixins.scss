@@ -1,0 +1,74 @@
+@mixin clear($altura){
+    &:after {
+        clear: both;
+        content: " ";
+        height: $altura;
+        visibility: hidden;
+        display: block;
+    }
+}
+
+@mixin transition($tempo){
+	transition: all $tempo ease-in-out;
+    -moz-transition: all $tempo ease-in-out;
+    -webkit-transition: all $tempo ease-in-out;
+    -o-transition: all $tempo ease-in-out;
+}
+
+@mixin gradiente($cor1, $cor2) {
+	background: $cor1; /* Old browsers */
+	background: -moz-linear-gradient(top,  $cor1 0%, $cor2 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$cor1), color-stop(100%,$cor2)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  $cor1 0%,$cor2 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  $cor1 0%,$cor2 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  $cor1 0%,$cor2 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  $cor1 0%,$cor2 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$cor1', endColorstr='$cor2',GradientType=0 ); /* IE6-9 */
+}
+
+@mixin alinharVertical() {
+    position: absolute;
+    top: 50%;
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+@mixin alinharHorizontal() {
+    left: 50%;
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+@mixin placeholder($cor){
+    &::-webkit-input-placeholder {
+       color: $cor;
+    }
+
+    &:-moz-placeholder {
+       color: $cor;
+    }
+
+    &::-moz-placeholder {
+       color: $cor;  
+    }
+
+    &:-ms-input-placeholder {  
+       color: $cor;  
+    }
+}
+
+@mixin btn-color($cor-principal, $cor-hover, $cor-texto) {
+    background: $cor-principal;
+    border-bottom: 3px solid darken($cor-principal, 20%);
+    color: $cor-texto;
+
+    &:hover {
+      background: $cor-hover;
+    }
+}

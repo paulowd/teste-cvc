@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Teste CVC - Aluguel de Veículos</title>
+  <link rel="stylesheet" href="assets/css/angular-material.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/sprite/sprite.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+  <script src="https://use.fontawesome.com/6ff298b380.js"></script>
+  <script src="assets/js/angular.js"></script>
+  <script src="assets/js/cvc-carros.js"></script>
+</head>
+<body>
+  <main ng-app="testecvc" ng-controller="CarrosController">
+    <div class="container">
+      <div class="row">
+        <aside class="grid-xs-12 grid-md-3">
+          <div class="aside-box yellow">
+            <form name="formBuscaCarros" id="form-busca-carros">
+              <div class="field-group field-block label-upper">
+                <label for="txt-local-retirada">Local de retirada</label>
+                <md-autocomplete 
+                  class="like-input"
+                  required
+                  placeholder="Escolha uma cidade"
+                  md-input-name="localRetirada"
+                  md-min-length="0" 
+                  md-selected-item="local.retirada" 
+                  md-search-text="localRetirada" 
+                  md-items="item in queryEstado(localRetirada)" 
+                  md-item-text="item.capital">
+                  <md-item-template>
+                    <span md-highlight-text="localRetirada">{{item.capital}}</span>
+                  </md-item-template>
+                </md-autocomplete>
+              </div>
+              <div class="field-group">
+                <div class="checkbox-group">
+                  <input type="checkbox" id="opt-devolver" ng-model="devolverOutroLocal">
+                  <label for="opt-devolver">Devolver o carro em outro local</label>
+                </div>
+              </div>
+              <div class="field-group field-block label-upper" ng-show="devolverOutroLocal">
+                <label for="txt-local-retirada">Local de devolução</label>
+                <md-autocomplete 
+                  class="like-input"
+                  md-min-length="0" 
+                  md-selected-item="local.devolucao" 
+                  md-search-text="localDevolucao" 
+                  md-items="item in queryEstado(localDevolucao)" 
+                  placeholder="Escolha uma cidade"
+                  md-item-text="item.capital"
+                  ng-model="local.devolucao"
+                  >
+                  <md-item-template>
+                    <span md-highlight-text="localDevolucao">{{item.capital}}</span>
+                  </md-item-template>
+                </md-autocomplete>
+              </div>
+              <div class="field-group label-upper">
+                <label for="">Retirada</label>
+
+                <div class="like-input">
+                  <md-datepicker 
+                    md-hide-icons="triangle"
+                    ng-model="dataRetirada" 
+                    md-open-on-focus
+                    md-min-date="minDataRetirada"
+                    md-max-date="maxDataRetirada"
+                    ng-change="calcularLimitesDataDevolucao()">
+                  </md-datepicker>
+                  <select name="" id="" ng-options="x for x in opcoesHorarios" ng-model="horarioRetirada"></select>
+                </div>
+              </div>
+              <div class="field-group label-upper">
+                <label for="">Devolução - {{diasLocacao}} dia(s)</label>
+
+                <div class="like-input">
+                  <md-datepicker 
+                    md-hide-icons="triangle"
+                    ng-model="dataDevolucao" 
+                    md-open-on-focus
+                    md-min-date="minDataDevolucao"
+                    md-max-date="maxDataDevolucao"
+                    ng-change="calcularDiasLocacao()">
+                  </md-datepicker>
+                  <select name="" id="" ng-options="x for x in opcoesHorarios" ng-model="horarioDevolucao"></select>
+                </div>
+              </div>
+
+              <div class="panel panel-green">
+                <div class="panel-header text-upper">
+                  Economize até 35%
+                </div>
+                <div class="panel-body">
+                  <div class="field-group">
+                    <div class="checkbox-group">
+                      <input type="checkbox" id="opt-voo">
+                      <label for="opt-voo">Incluir vôo</label>
+                    </div>
+                    <div class="checkbox-group">
+                      <input type="checkbox" id="opt-hotel">
+                      <label for="opt-hotel">Incluir hotel</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button class="btn btn-block btn-blue btn-lg text-upper" ng-click="atualizarLista()">
+                Buscar
+              </button>
+            </form>
+          </div>
+        </aside>
+        <div class="grid-xs-12 grid-md-9">
+          <div class="filtros-resultado row">
+            <div class="grid-xs-12 grid-md-3">
+              <div class="field-group filter-field">
+                <label for="cmb-ipp">Itens por página</label>
+                <div class="wrap-select">
+                  <select id="cmb-ipp" ng-model="pagination.itemsPerPage" ng-change="atualizarPagination()">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="grid-xs-12 grid-md-4">
+              <div class="field-group filter-field">
+                <label for="cmb-ipp">Ordenar por</label>
+                <div class="wrap-select">
+                  <select id="cmb-ipp" ng-change="reordenar()" ng-model="ordem_param">
+                    <option value="none">Nenhum</option>
+                    <option value="low_price">Menor preço</option>
+                    <option value="high_price">Maior preço</option>
+                    <option value="high_locate">Mais alugado</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="grid-xs-12 grid-md-2">
+              <div class="field-group filter-field">
+                <label for="cmb-ipp">Moeda</label>
+                <div class="wrap-select">
+                  <select id="cmb-ipp" ng-model="moeda">
+                    <option value="real">Real</option>
+                    <option value="dolar">Dólar</option>
+                    <option value="euro">Euro</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="resultados-busca">
+            <div class="feedback-atualziacao" ng-show="feedbackAtualizacaoLista">
+              Atualizando resultados...
+            </div>
+
+            <article class="row item-resultado-busca" ng-repeat="carro in carros | startFrom:(pagination.page - 1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage ">
+              <div class="grid-xs-12 grid-md-9">
+                <div class="row">
+                  <div class="grid-xs-12 grid-md-5 foto-carro">
+                    <img src="assets/img/carros/{{carro.imageUrl}}" alt="">
+                    <div class="locadora">
+                      <img src="assets/img/locadoras/{{carro.locadora}}.jpg" alt="{{carro.locadora}}">
+                    </div>
+                  </div>
+                  <div class="grid-xs-12 grid-md-7 info-locacao">
+                    <h1>{{carro.name}}</h1>
+                    <p class="descricao text-upper">
+                      Código da taxa: {{carro.codigo}}<br>
+                      {{carro.descricao}}
+                    </p>
+                    <ul class="lista-destaques">
+                      <li ng-repeat="destaque in carro.destaques">{{destaque}}</li>
+                    </ul>
+
+                    <a href="#" class="btn-detalhe" ng-click="toggleDetalhe(carro)" ng-show="! carro.showDetalhe">Ver detalhes <i class="fa fa-plus"></i></a>
+                    <a href="#" class="btn-detalhe" ng-click="toggleDetalhe(carro)" ng-show="carro.showDetalhe">Ocultar detalhes <i class="fa fa-times"></i></a>
+
+                    <a href="#" class="btn-favorito" ng-class="{active:carro.favorito}" ng-click="favoritarCarro(carro)"><i class="fa fa-heart"></i></a>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="grid-xs-12 detalhe-locacao sample-show-hide" ng-show="carro.showDetalhe">
+                      {{carro.detalhes}}
+                  </div>
+                  <div class="grid-xs-12">
+                    <ul class="lista-opcionais">
+                      <li ng-repeat="opcional in carro.opcionais"><i class="icon icon-{{ opcional.icone }}"></i> {{opcional.texto}}</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="grid-xs-12 grid-md-3">
+                <div class="info-valor-locacao aside-box text-center" ng-class="{yellow:!carro.alugado, blue:carro.alugado}">
+                  <div ng-show="!carro.alugado">
+                    <h3>Total da Locação</h3>
+                    <div ng-if="carro.desconto > 0">
+                      <span class="valor-original">de {{moedas[moeda].simbolo}} {{formatarValor(carro.valor * diasLocacao)}}</span><br>
+                      por <span class="valor"><small>{{moedas[moeda].simbolo}}</small> {{(formatarValor(carro.valor * diasLocacao * (1 - (carro.desconto / 100))))}}</span>
+                    </div>
+                    <div ng-if="carro.desconto <= 0">
+                      <span class="valor"><small>{{moedas[moeda].simbolo}}</small> {{formatarValor(carro.valor * diasLocacao)}}</span>
+                    </div>
+                    <strong><span class="parcelamento">em até 10x</span></strong>
+
+                    <button class="btn btn-lg btn-blue btn-block text-upper" ng-click="alugarCarro(carro)">Alugar</button>
+                    <small>Taxas inclusas</small>
+                  </div>
+                  <div ng-show="carro.alugado">
+                    <h1>Carro alugado com sucesso!</h1>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <ul class="pagination">
+              <li><button ng-click="alterarPagina(pagination.page - 1)">&laquo;</button></li>
+              <li ng-repeat="n in [] | rangePagination:pagination.totalPages"><button ng-class="n == pagination.page? 'active' : ''" ng-click="alterarPagina(n)">{{n}}</a></li>
+              <li><button ng-click="alterarPagina(pagination.page + 1)">&raquo;</button></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
