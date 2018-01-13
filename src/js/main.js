@@ -1,11 +1,13 @@
-angular.module('testecvc', ['carrosDirectives','ngAnimate', 'ngResource', 'ngMaterial', 'carrosServices'])
+angular.module('testecvc', ['ngAnimate', 'ngResource', 'ngMaterial', 'carrosServices'])
 	.filter('startFrom', function() {
+		// Filtro utilizado para gerar botoes de paginação
 		return function(input, start) {
-				start = +start; //parse to int
+				start = +start; 
 				return input.slice(start);
 		}
 	})
 	.filter('rangePagination', function() {
+		// Filtro utilizado para gerar botoes de paginação
 		return function(input, total) {
 			total = parseInt(total);
 	

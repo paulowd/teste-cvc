@@ -4,7 +4,8 @@ var gulp = require('gulp'),
   minify = require('gulp-minify'),
   concat = require('gulp-concat'),
   runSequence = require('run-sequence'),
-  spritesmith = require('gulp.spritesmith');
+  spritesmith = require('gulp.spritesmith'),
+  ngAnnotate = require('gulp-ng-annotate');
 
 // Declara caminho dos diretórios de arquivos fontes
 // e seus respectivos destinos após o build
@@ -23,9 +24,16 @@ var path = {
   sprite: 'src/sprite/'
 };
 
+
+// Realiza o build dos scripts js
+// pegando todos arquivos da pasta
+// e concatenando em um unico arquivo
 gulp.task('scripts', function() {
   gulp.src([path.js_src + '**/*.js'])
     .pipe(concat('cvc-carros.js'))
+    .pipe(ngAnnotate({
+      add: true
+    }))
     .pipe(minify({
       ext: {
         src: '-debug.js',
@@ -58,16 +66,6 @@ gulp.task('img', function() {
     .pipe(gulp.dest(path.img_dist));
 });
 
-gulp.task('watch', function() {
-  gulp.run('build');
-
-  gulp.watch(path.css_src + '**/*', ['styles']);
-  gulp.watch(path.js_src + '**/*', ['scripts']);
-  gulp.watch(path.html_src + '**/*', ['html']);
-  gulp.watch(path.img_src + '**/*', ['img']);
-  gulp.watch(path.sprite + '*.png', ['sprite']);
-});
-
 gulp.task('copy_angular', function() {
   gulp.src(
     [
@@ -89,8 +87,9 @@ gulp.task('copy_angular', function() {
     
 });
 
-gulp.task('build', function(callback) {
-  runSequence('styles', 'sprite', 'copy_angular', 'scripts', 'html', 'img', callback);
+gulp.task('copy_fonts', function() {
+  gulp.src(path.fonts_src + '*')
+    .pipe(gulp.dest(path.fonts_dist));    
 });
 
 gulp.task('sprite', function () {
@@ -99,4 +98,19 @@ gulp.task('sprite', function () {
     cssName: 'sprite.css'
   }));
   spriteData.pipe(gulp.dest('public/assets/sprite/'));
+});
+
+gulp.task('build', function(callback) {
+  runSequence('styles', 'copy_fonts', 'sprite', 'copy_angular', 'scripts', 'html', 'img', callback);
+});
+
+gulp.task('watch', function() {
+  gulp.run('build');
+
+  gulp.watch(path.css_src + '**/*', ['styles']);
+  gulp.watch(path.js_src + '**/*', ['scripts']);
+  gulp.watch(path.html_src + '**/*', ['html']);
+  gulp.watch(path.img_src + '**/*', ['img']);
+  gulp.watch(path.sprite + '*.png', ['sprite']);
+  gulp.watch(path.fonts_src + '*', ['copy_fonts']);
 });

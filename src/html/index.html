@@ -13,7 +13,7 @@
 
   <script src="https://use.fontawesome.com/6ff298b380.js"></script>
   <script src="assets/js/angular.js"></script>
-  <script src="assets/js/cvc-carros-debug.js"></script>
+  <script src="assets/js/cvc-carros.js"></script>
 </head>
 <body>
   <main ng-app="testecvc" ng-controller="CarrosController">
@@ -111,7 +111,7 @@
                 </div>
               </div>
 
-              <button class="btn btn-block btn-blue btn-lg text-upper">
+              <button class="btn btn-block btn-blue btn-lg text-upper" ng-click="atualizarLista()">
                 Buscar
               </button>
             </form>
@@ -160,6 +160,10 @@
           </div>
 
           <div id="resultados-busca">
+            <div class="feedback-atualziacao" ng-show="feedbackAtualizacaoLista">
+              Atualizando resultados...
+            </div>
+
             <article class="row item-resultado-busca" ng-repeat="carro in carros | startFrom:(pagination.page - 1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage ">
               <div class="grid-xs-12 grid-md-9">
                 <div class="row">
@@ -182,7 +186,7 @@
                     <a href="#" class="btn-detalhe" ng-click="toggleDetalhe(carro)" ng-show="! carro.showDetalhe">Ver detalhes <i class="fa fa-plus"></i></a>
                     <a href="#" class="btn-detalhe" ng-click="toggleDetalhe(carro)" ng-show="carro.showDetalhe">Ocultar detalhes <i class="fa fa-times"></i></a>
 
-                    <a href="#" class="btn-favorito"><i class="fa fa-heart"></i></a>
+                    <a href="#" class="btn-favorito" ng-class="{active:carro.favorito}" ng-click="favoritarCarro(carro)"><i class="fa fa-heart"></i></a>
                   </div>
                 </div>
                 <div class="row">
@@ -197,19 +201,24 @@
                 </div>
               </div>
               <div class="grid-xs-12 grid-md-3">
-                <div class="info-valor-locacao aside-box yellow text-center">
-                  <h3>Total da Locação</h3>
-                  <div ng-if="carro.desconto > 0">
-                    <span class="valor-original">de {{moedas[moeda].simbolo}} {{formatarValor(carro.valor * diasLocacao)}}</span><br>
-                    por <span class="valor"><small>{{moedas[moeda].simbolo}}</small> {{(formatarValor(carro.valor * diasLocacao * (1 - (carro.desconto / 100))))}}</span>
-                  </div>
-                  <div ng-if="carro.desconto <= 0">
-                    <span class="valor"><small>{{moedas[moeda].simbolo}}</small> {{formatarValor(carro.valor * diasLocacao)}}</span>
-                  </div>
-                  <strong><span class="parcelamento">em até 10x</span></strong>
+                <div class="info-valor-locacao aside-box text-center" ng-class="{yellow:!carro.alugado, blue:carro.alugado}">
+                  <div ng-show="!carro.alugado">
+                    <h3>Total da Locação</h3>
+                    <div ng-if="carro.desconto > 0">
+                      <span class="valor-original">de {{moedas[moeda].simbolo}} {{formatarValor(carro.valor * diasLocacao)}}</span><br>
+                      por <span class="valor"><small>{{moedas[moeda].simbolo}}</small> {{(formatarValor(carro.valor * diasLocacao * (1 - (carro.desconto / 100))))}}</span>
+                    </div>
+                    <div ng-if="carro.desconto <= 0">
+                      <span class="valor"><small>{{moedas[moeda].simbolo}}</small> {{formatarValor(carro.valor * diasLocacao)}}</span>
+                    </div>
+                    <strong><span class="parcelamento">em até 10x</span></strong>
 
-                  <a href="#" class="btn btn-lg btn-blue btn-block text-upper">Alugar</a>
-                  <small>Taxas inclusas</small>
+                    <button class="btn btn-lg btn-blue btn-block text-upper" ng-click="alugarCarro(carro)">Alugar</button>
+                    <small>Taxas inclusas</small>
+                  </div>
+                  <div ng-show="carro.alugado">
+                    <h1>Carro alugado com sucesso!</h1>
+                  </div>
                 </div>
               </div>
             </article>
