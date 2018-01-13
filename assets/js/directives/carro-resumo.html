@@ -1,0 +1,58 @@
+<article class="row item-resultado-busca" ng-repeat="carro in carros | startFrom:(pagination.page - 1)*pagination.itemsPerPage | limitTo:pagination.itemsPerPage ">
+    <div class="grid-xs-12 grid-md-9">
+      <div class="row">
+        <div class="grid-xs-12 grid-md-5 foto-carro">
+          <img src="assets/img/carros/{{carro.imageUrl}}" alt="">
+          <div class="locadora">
+            <img src="assets/img/locadoras/{{carro.locadora}}.jpg" alt="{{carro.locadora}}">
+          </div>
+        </div>
+        <div class="grid-xs-12 grid-md-7 info-locacao">
+          <h1>{{carro.name}}</h1>
+          <p class="descricao text-upper">
+            Código da taxa: {{carro.codigo}}<br>
+            {{carro.descricao}}
+          </p>
+          <ul class="lista-destaques">
+            <li ng-repeat="destaque in carro.destaques">{{destaque}}</li>
+          </ul>
+
+          <a href="#" class="btn-detalhe" ng-click="toggleDetalhe(carro)" ng-show="! carro.showDetalhe">Ver detalhes <i class="fa fa-plus"></i></a>
+          <a href="#" class="btn-detalhe" ng-click="toggleDetalhe(carro)" ng-show="carro.showDetalhe">Ocultar detalhes <i class="fa fa-times"></i></a>
+
+          <a href="#" class="btn-favorito" ng-class="{active:carro.favorito}" ng-click="favoritarCarro(carro)"><i class="fa fa-heart"></i></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="grid-xs-12 detalhe-locacao sample-show-hide" ng-show="carro.showDetalhe">
+            {{carro.detalhes}}
+        </div>
+        <div class="grid-xs-12">
+          <ul class="lista-opcionais">
+            <li ng-repeat="opcional in carro.opcionais"><i class="icon icon-{{ opcional.icone }}"></i> {{opcional.texto}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="grid-xs-12 grid-md-3">
+      <div class="info-valor-locacao aside-box text-center" ng-class="{yellow:!carro.alugado, blue:carro.alugado}">
+        <div ng-show="!carro.alugado">
+          <h3>Total da Locação</h3>
+          <div ng-if="carro.desconto > 0">
+            <span class="valor-original">de {{moedas[moeda].simbolo}} {{formatarValor(carro.valor * diasLocacao)}}</span><br>
+            por <span class="valor"><small>{{moedas[moeda].simbolo}}</small> {{(formatarValor(carro.valor * diasLocacao * (1 - (carro.desconto / 100))))}}</span>
+          </div>
+          <div ng-if="carro.desconto <= 0">
+            <span class="valor"><small>{{moedas[moeda].simbolo}}</small> {{formatarValor(carro.valor * diasLocacao)}}</span>
+          </div>
+          <strong><span class="parcelamento">em até 10x</span></strong>
+
+          <button class="btn btn-lg btn-blue btn-block text-upper" ng-click="alugarCarro(carro)">Alugar</button>
+          <small>Taxas inclusas</small>
+        </div>
+        <div ng-show="carro.alugado">
+          <h1>Carro alugado com sucesso!</h1>
+        </div>
+      </div>
+    </div>
+  </article>
