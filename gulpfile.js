@@ -5,7 +5,8 @@ var gulp = require('gulp'),
   concat = require('gulp-concat'),
   runSequence = require('run-sequence'),
   spritesmith = require('gulp.spritesmith'),
-  ngAnnotate = require('gulp-ng-annotate');
+  ngAnnotate = require('gulp-ng-annotate'),
+  ghPages = require('gulp-gh-pages');
 
 // Declara caminho dos diretórios de arquivos fontes
 // e seus respectivos destinos após o build
@@ -102,6 +103,13 @@ gulp.task('sprite', function () {
 
 gulp.task('build', function(callback) {
   runSequence('styles', 'copy_fonts', 'sprite', 'copy_angular', 'scripts', 'html', 'img', callback);
+});
+
+gulp.task('ghpage', function(){
+  runSequence('build');
+
+  return gulp.src('./public/**/*')
+    .pipe(ghPages());
 });
 
 gulp.task('watch', function() {
